@@ -89,11 +89,10 @@ bool MemoryDB::kill(h256 _h)
 	{
 		dbdebug << "NOKILL" << _h.abridged();
 		return false;
-	}
 #else
 		return true;
-	}
 #endif
+	}
 }
 
 void MemoryDB::purge()
