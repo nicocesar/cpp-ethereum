@@ -14,43 +14,31 @@
 	You should have received a copy of the GNU General Public License
 	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
 */
-/** @file MiningView.h
+/** @file main.cpp
  * @author Gav Wood <i@gavwood.com>
  * @date 2014
+ * Ethereum client.
  */
 
-#pragma once
+#include <libethsupport/Log.h>
+#include <libethsupport/Common.h>
+#include <libethsupport/CommonData.h>
+#include "BuildInfo.h"
+using namespace std;
+using namespace eth;
 
-#include <list>
-#include <QtWidgets/QWidget>
-#include <libethereum/Client.h>
-
-namespace eth
+int main(int, char**)
 {
-struct MineInfo;
+    u256 z = 0;
+    u256 s = 7;
+    u256 ms = z - s;
+    s256 ams = -7;
+    s256 sms = u2s(ms);
+    cnote << sms;
+    cnote << ams;
+    cnote << ms;
+    u256 t = 3;
+    s256 st = u2s(t);
+    cnote << ms << t << (sms % t) << sms << st << (s2u(sms % st) + 70);
+	return 0;
 }
-
-class MiningView: public QWidget
-{
-	Q_OBJECT
-
-public:
-	MiningView(QWidget* _p = nullptr);
-
-	void appendStats(std::list<eth::MineInfo> const& _l, eth::MineProgress const& _p);
-	void resetStats();
-
-protected:
-	virtual void paintEvent(QPaintEvent*);
-
-private:
-	eth::MineProgress m_progress;
-	unsigned m_duration = 300;
-	std::vector<float> m_values;
-	std::vector<float> m_bests;
-	std::vector<float> m_reqs;
-	std::vector<int> m_resets;
-	std::vector<int> m_completes;
-	double m_lastBest = 1e31;
-	bool m_haveReset = false;
-};
